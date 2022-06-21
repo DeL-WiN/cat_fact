@@ -1,8 +1,10 @@
+import 'package:bloc/bloc.dart';
+
 import '../../models/facts/fact/fact.dart';
 import '../../models/photos/photos.dart';
 import '../../repozetoziy/api_facts.dart';
 import '../../repozetoziy/api_photos.dart';
-import 'package:bloc/bloc.dart';
+
 part 'photos_event.dart';
 part 'photos_state.dart';
 
@@ -10,10 +12,14 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
   final ApiPhotos apiPhotos;
   final ApiFact apiFact;
 
-  PhotosBloc({required this.apiPhotos, required this.apiFact}) : super(PhotosStateLoading()) {
+  PhotosBloc({required this.apiPhotos, required this.apiFact})
+      : super(PhotosStateLoading()) {
     on<PhotosEvent>((event, emit) {
       if (event is LoadingDataEvent) {
         return _loadData(event, emit);
+      }
+      if (event is LoadingFactsEvent) {
+        return _loadFact(event, emit);
       }
     });
     add(LoadingDataEvent());
@@ -22,7 +28,16 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
   Future<void> _loadData(PhotosEvent event, Emitter<PhotosState> emit) async {
     final photos = await apiPhotos.getPost();
     final facts = await apiFact.getHttp();
+
     emit(PhotosStateLoaded(photos, facts, []));
+  }
+
+  Future<void> _loadFact(PhotosEvent event, Emitter<PhotosState> emit) async {
+    final facts = await apiFact.getHttp();
+    final photo = state as PhotosStateLoaded;
+    final image = photo.photos;
+
+    emit(PhotosStateLoaded(image, facts, []));
   }
 
   void ret(Photos boal) {
@@ -32,4 +47,3 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
     emit(PhotosStateLoaded(mystate.photos, mystate.factss, favorite));
   }
 }
-

@@ -34,6 +34,8 @@ class _CatsState extends State<Cats> {
                       children: [
                         InkWell(
                           onTap: () {
+                            BlocProvider.of<PhotosBloc>(context)
+                                .add(LoadingFactsEvent());
                             Navigator.push(
                               context,
                               MaterialPageRoute(
