@@ -18,7 +18,6 @@ class Favorites extends StatelessWidget {
               //   scrollDirection: Axis.vertical,
               //     itemCount:
               //     itemBuilder:
-              ),
             ),
           ],
         ),
