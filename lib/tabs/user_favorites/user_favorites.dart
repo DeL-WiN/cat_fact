@@ -25,4 +25,3 @@ class Favorites extends StatelessWidget {
     );
   }
 }
-lox
