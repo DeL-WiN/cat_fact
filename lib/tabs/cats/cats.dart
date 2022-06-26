@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled3/tabs/cats/secon_cats.dart';
 
@@ -28,6 +29,7 @@ class _CatsState extends State<Cats> {
                   itemCount: state.photos.length,
                   itemBuilder: (context, i) {
                     return Column(
+
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       // crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,14 +49,45 @@ class _CatsState extends State<Cats> {
                           },
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
-                            child: Image.network(
-                              state.photos[i].url,
+                            child: Container(
+                              height: 400,
+                              width: 400,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    state.photos[i].url,
+                                  ),
+                                  fit: BoxFit.fitHeight,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
                           ),
                         ),
+                        // LikeButton(
+                        //   circleColor: CircleColor(start: Colors.red, end: Colors.red),
+                        //   likeBuilder: (bool isLiked) {
+                        //     return Icon(
+                        //       Icons.favorite,
+                        //       color: isLiked ? Colors.red: Colors.white60,
+                        //     );
+                        //   },
+                        //   countBuilder: (int? count, bool isLiked, String text) {
+                        //     BlocProvider.of<PhotosBloc>(context)
+                        //         .add(LoadingFactsEvent());
+                        //     Widget result;
+                        //     if (isLiked == false) {
+                        //     result = context.read<PhotosBloc>().favorit(state.photos[i]);
+                        //     } else
+                        //     context.read<PhotosBloc>().deleteFavorit(i);
+                        //   },
+                        // ),
                         IconButton(
-                            onPressed: () =>
-                                context.read<PhotosBloc>().ret(state.photos[i]),
+                            onPressed: () {
+                           setState(() {
+                             context.read<PhotosBloc>().favorit(state.photos[i]);
+                           });
+                              },
                             icon: const Icon(
                               Icons.favorite_border_sharp,
                               color: Colors.red,

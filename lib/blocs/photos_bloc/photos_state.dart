@@ -1,7 +1,10 @@
 part of 'photos_bloc.dart';
 
 
-abstract class PhotosState {}
+abstract class PhotosState {
+
+  copyWith({required Photos currentUser}) {}
+}
 
 class PhotosStateLoading extends PhotosState {}
 

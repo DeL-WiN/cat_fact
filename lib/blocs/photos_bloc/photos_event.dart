@@ -5,3 +5,5 @@ abstract class PhotosEvent {}
 class LoadingDataEvent extends PhotosEvent {}
 
 class LoadingFactsEvent extends PhotosEvent {}
+
+class LoadingFavoritesEvent extends PhotosEvent {}

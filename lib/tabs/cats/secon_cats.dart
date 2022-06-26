@@ -13,12 +13,28 @@ class SecondCats extends StatelessWidget {
       backgroundColor: Colors.black87,
       body: Column(
         children: [
-          Image.network(catImageUrl),
-          Text(
-            fact,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
+          Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                    width: 400,
+                    height: 500,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(catImageUrl),
+                            fit: BoxFit.fitHeight))),
+              )),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(4, 30, 4, 0),
+            child: Container(
+              child: Text(
+                fact,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                ),
+                  textAlign: TextAlign.center,
+              ),
             ),
           ),
         ],

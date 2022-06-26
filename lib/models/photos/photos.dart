@@ -5,8 +5,8 @@ part 'photos.g.dart';
 class Photos {
   final String id;
   final String url;
-  final int width;
-  final int height;
+  final int? width;
+  final int? height;
 
   Photos({required this.id,
     required this.url, required this.width, required this.height
