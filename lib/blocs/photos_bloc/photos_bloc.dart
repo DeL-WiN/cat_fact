@@ -10,7 +10,6 @@ part 'photos_event.dart';
 part 'photos_state.dart';
 
 class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
-
   final _photosProvider = PhotosProvider();
   final ApiPhotos apiPhotos;
   final ApiFact apiFact;
@@ -32,8 +31,12 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
   Future<void> _loadData(PhotosEvent event, Emitter<PhotosState> emit) async {
     final photos = await apiPhotos.getPost();
     final facts = await apiFact.getHttp();
-    emit(PhotosStateLoaded(photos, facts, []));
-    // _photosProvider.loadValue(photos);
+
+    final _state = state;
+    if (_state is PhotosStateLoaded) {
+      final favorites = _state.favorites;
+      emit(PhotosStateLoaded(photos, facts, favorites));
+    }
   }
 
   Future<void> _loadFact(PhotosEvent event, Emitter<PhotosState> emit) async {
@@ -41,9 +44,12 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
     final photo = state as PhotosStateLoaded;
     final image = photo.photos;
 
-    emit(PhotosStateLoaded(image, facts, []));
+    final _state = state;
+    if (_state is PhotosStateLoaded) {
+      final favorites = _state.favorites;
+      emit(PhotosStateLoaded(image, facts, favorites));
+    }
   }
-
 
   Future<void> _initialize() async {
     final photos = await _photosProvider.loadValue();
@@ -55,6 +61,7 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
     final mystate = state as PhotosStateLoaded;
     var favorite = mystate.favorites;
     favorite.add(boal);
+
     emit(PhotosStateLoaded(mystate.photos, mystate.factss, favorite));
     _photosProvider.saveValue(favorite);
   }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:like_button/like_button.dart';
-import 'package:provider/provider.dart';
 import 'package:untitled3/tabs/cats/secon_cats.dart';
 
 import '../../blocs/photos_bloc/photos_bloc.dart';
@@ -28,11 +26,12 @@ class _CatsState extends State<Cats> {
               child: ListView.builder(
                   itemCount: state.photos.length,
                   itemBuilder: (context, i) {
-                    return Column(
+                    final imageUrl = state.photos[i].url;
+                    final isFavorite = state.favorites.contains(imageUrl);
 
+                    return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         InkWell(
                           onTap: () {
@@ -64,34 +63,17 @@ class _CatsState extends State<Cats> {
                             ),
                           ),
                         ),
-                        // LikeButton(
-                        //   circleColor: CircleColor(start: Colors.red, end: Colors.red),
-                        //   likeBuilder: (bool isLiked) {
-                        //     return Icon(
-                        //       Icons.favorite,
-                        //       color: isLiked ? Colors.red: Colors.white60,
-                        //     );
-                        //   },
-                        //   countBuilder: (int? count, bool isLiked, String text) {
-                        //     BlocProvider.of<PhotosBloc>(context)
-                        //         .add(LoadingFactsEvent());
-                        //     Widget result;
-                        //     if (isLiked == false) {
-                        //     result = context.read<PhotosBloc>().favorit(state.photos[i]);
-                        //     } else
-                        //     context.read<PhotosBloc>().deleteFavorit(i);
-                        //   },
-                        // ),
                         IconButton(
-                            onPressed: () {
-                           setState(() {
-                             context.read<PhotosBloc>().favorit(state.photos[i]);
-                           });
-                              },
-                            icon: const Icon(
-                              Icons.favorite_border_sharp,
-                              color: Colors.red,
-                            )),
+                          onPressed: () {
+                            context.read<PhotosBloc>().favorit(state.photos[i]);
+                          },
+                          icon: Icon(
+                            isFavorite
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_border_sharp,
+                            color: Colors.red,
+                          ),
+                        ),
                       ],
                     );
                   }),

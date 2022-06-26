@@ -15,15 +15,15 @@ class SecondCats extends StatelessWidget {
         children: [
           Center(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                    width: 400,
-                    height: 500,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(catImageUrl),
-                            fit: BoxFit.fitHeight))),
-              )),
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+                width: 400,
+                height: 500,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(catImageUrl),
+                        fit: BoxFit.fitHeight))),
+          )),
           Padding(
             padding: const EdgeInsets.fromLTRB(4, 30, 4, 0),
             child: Container(
@@ -33,7 +33,7 @@ class SecondCats extends StatelessWidget {
                   color: Colors.white,
                   fontSize: 25,
                 ),
-                  textAlign: TextAlign.center,
+                textAlign: TextAlign.center,
               ),
             ),
           ),
