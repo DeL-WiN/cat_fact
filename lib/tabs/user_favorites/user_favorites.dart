@@ -16,7 +16,7 @@ class Favorites extends StatelessWidget {
       }
       if (state is PhotosStateLoaded) {
         return Scaffold(
-          backgroundColor: Colors.black87,
+          backgroundColor: Colors.black54,
           body: Center(
             child: Container(
               child: ListView.builder(
