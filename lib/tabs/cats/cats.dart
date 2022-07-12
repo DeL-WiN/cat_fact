@@ -21,7 +21,7 @@ class _CatsState extends State<Cats> {
         }
         if (state is PhotosStateLoaded) {
           return Scaffold(
-            backgroundColor: Colors.black87,
+            backgroundColor: Colors.black54,
             body: Center(
               child: ListView.builder(
                   itemCount: state.photos.length,
