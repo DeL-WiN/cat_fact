@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../models/details/details.dart';
 import 'controllers/login_controler.dart';
 
 class Profile extends StatefulWidget {
@@ -27,7 +28,7 @@ class _ProfileState extends State<Profile> {
               child: loggedInUI(model),
             );
           }else {
-            return loginControllers(context);
+            return cash();
           }
         }
     );
@@ -37,7 +38,8 @@ class _ProfileState extends State<Profile> {
 
     return Consumer<LoginController> (
         builder: (context, model, child) {
-          if(model.userP.user?.loadCash() != null) {
+          var userCash = model.userP.user?.loadCash();
+          if(userCash != null) {
             return Center(
               child: loggedInUI(model),
             );

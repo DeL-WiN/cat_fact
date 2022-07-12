@@ -18,10 +18,10 @@ class UserProvider {
     UserDetalils(displaiyName: name, email: mail, photoUrl: photo);
 
     print(object.displaiyName);
-    // print(object.email);
-    // print(object.photoUrl);
-    // print('1');
-    // (await sharedPreferences).remove('list');
+    print(object.email);
+    print(object.photoUrl);
+    print('1');
+    (await sharedPreferences).remove('list');
     return object;
   }
 
